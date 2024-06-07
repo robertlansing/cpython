@@ -1740,7 +1740,7 @@ class Decimal(object):
         ROUND_05UP = _round_05up,
     )
 
-    def __round__(self, n=None):
+    def __round__(self, n=None, rounding=ROUND_HALF_EVEN):
         """Round self to the nearest integer, or to a given precision.
 
         If only one argument is supplied, round a finite Decimal
@@ -1800,7 +1800,7 @@ class Decimal(object):
                 raise ValueError("cannot round a NaN")
             else:
                 raise OverflowError("cannot round an infinity")
-        return int(self._rescale(0, ROUND_HALF_EVEN))
+        return int(self._rescale(0, rounding))
 
     def __floor__(self):
         """Return the floor of self, as an integer.
