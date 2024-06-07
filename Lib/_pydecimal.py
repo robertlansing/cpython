@@ -1786,14 +1786,22 @@ class Decimal(object):
         >>> round(Decimal('sNaN123'), 0)
         Decimal('NaN123')
 
+        If a third argument rounding is supplied, self is rounded 
+        using the rounding scheme provided of the options: 
+        'ROUND_HALF_UP' or 'ROUND_HALF_EVEN'
+        'ROUND_HALF_EVEN' is default and use's Banker's Rounding rules.
+        'ROUND_HALF_UP' rounds all 0.5 values up to the next integer.
         """
         if n is not None:
             # two-argument form: use the equivalent quantize call
             if not isinstance(n, int):
                 raise TypeError('Second argument to round should be integral')
             exp = _dec_from_triple(0, '1', -n)
-            return self.quantize(exp)
-
+            return self.quantize(exp, rounding=rounding)
+        
+        if rounding not in ['ROUND_HALF_UP', 'ROUND_HALF_EVEN']:
+            raise TypeError("Third argument should be either 'ROUND_HALF_UP' or 'ROUND_HALF_EVEN' (default)")
+            
         # one-argument form
         if self._is_special:
             if self.is_nan():

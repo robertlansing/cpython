@@ -1674,60 +1674,61 @@ class BuiltinTest(unittest.TestCase):
         self.assertRaises(TypeError, round, t, 0)
     
     def test_round_half_up(self):
-        self.assertEqual(round(0.0, rounding=ROUND_HALF_UP), 0.0)
-        self.assertEqual(type(round(0.0, rounding=ROUND_HALF_UP)), int)
-        self.assertEqual(round(1.0, rounding=ROUND_HALF_UP), 1.0)
-        self.assertEqual(round(10.0, rounding=ROUND_HALF_UP), 10.0)
-        self.assertEqual(round(1000000000.0, rounding=ROUND_HALF_UP), 1000000000.0)
-        self.assertEqual(round(1e20, rounding=ROUND_HALF_UP), 1e20)
+        self.assertEqual(round(0.0, rounding='ROUND_HALF_UP'), 0.0)
+        self.assertEqual(type(round(0.0, rounding='ROUND_HALF_UP')), int)
+        self.assertEqual(round(1.0, rounding='ROUND_HALF_UP'), 1.0)
+        self.assertEqual(round(10.0, rounding='ROUND_HALF_UP'), 10.0)
+        self.assertEqual(round(1000000000.0, rounding='ROUND_HALF_UP'), 1000000000.0)
+        self.assertEqual(round(1e20, rounding='ROUND_HALF_UP'), 1e20)
 
-        self.assertEqual(round(-1.0, rounding=ROUND_HALF_UP), -1.0)
-        self.assertEqual(round(-10.0, rounding=ROUND_HALF_UP), -10.0)
-        self.assertEqual(round(-1000000000.0, rounding=ROUND_HALF_UP), -1000000000.0)
-        self.assertEqual(round(-1e20, rounding=ROUND_HALF_UP), -1e20)
+        self.assertEqual(round(-1.0, rounding='ROUND_HALF_UP'), -1.0)
+        self.assertEqual(round(-10.0, rounding='ROUND_HALF_UP'), -10.0)
+        self.assertEqual(round(-1000000000.0, rounding='ROUND_HALF_UP'), -1000000000.0)
+        self.assertEqual(round(-1e20, rounding='ROUND_HALF_UP'), -1e20)
 
-        self.assertEqual(round(0.1, rounding=ROUND_HALF_UP), 0.0)
-        self.assertEqual(round(1.1, rounding=ROUND_HALF_UP), 1.0)
-        self.assertEqual(round(10.1, rounding=ROUND_HALF_UP), 10.0)
-        self.assertEqual(round(1000000000.1, rounding=ROUND_HALF_UP), 1000000000.0)
+        self.assertEqual(round(0.1, rounding='ROUND_HALF_UP'), 0.0)
+        self.assertEqual(round(1.1, rounding='ROUND_HALF_UP'), 1.0)
+        self.assertEqual(round(10.1, rounding='ROUND_HALF_UP'), 10.0)
+        self.assertEqual(round(1000000000.1, rounding='ROUND_HALF_UP'), 1000000000.0)
 
-        self.assertEqual(round(-1.1, rounding=ROUND_HALF_UP), -1.0)
-        self.assertEqual(round(-10.1, rounding=ROUND_HALF_UP), -10.0)
-        self.assertEqual(round(-1000000000.1, rounding=ROUND_HALF_UP), -1000000000.0)
+        self.assertEqual(round(-1.1, rounding='ROUND_HALF_UP'), -1.0)
+        self.assertEqual(round(-10.1, rounding='ROUND_HALF_UP'), -10.0)
+        self.assertEqual(round(-1000000000.1, rounding='ROUND_HALF_UP'), -1000000000.0)
 
-        self.assertEqual(round(0.9, rounding=ROUND_HALF_UP), 1.0)
-        self.assertEqual(round(9.9, rounding=ROUND_HALF_UP), 10.0)
-        self.assertEqual(round(999999999.9, rounding=ROUND_HALF_UP), 1000000000.0)
+        self.assertEqual(round(0.9, rounding='ROUND_HALF_UP'), 1.0)
+        self.assertEqual(round(9.9, rounding='ROUND_HALF_UP'), 10.0)
+        self.assertEqual(round(999999999.9, rounding='ROUND_HALF_UP'), 1000000000.0)
 
-        self.assertEqual(round(-0.9, rounding=ROUND_HALF_UP), -1.0)
-        self.assertEqual(round(-9.9, rounding=ROUND_HALF_UP), -10.0)
-        self.assertEqual(round(-999999999.9, rounding=ROUND_HALF_UP), -1000000000.0)
+        self.assertEqual(round(-0.9, rounding='ROUND_HALF_UP'), -1.0)
+        self.assertEqual(round(-9.9, rounding='ROUND_HALF_UP'), -10.0)
+        self.assertEqual(round(-999999999.9, rounding='ROUND_HALF_UP'), -1000000000.0)
 
-        self.assertEqual(round(-8.0, -1, rounding=ROUND_HALF_UP), -10.0)
-        self.assertEqual(type(round(-8.0, -1, rounding=ROUND_HALF_UP)), float)
+        self.assertEqual(round(-8.0, -1, rounding='ROUND_HALF_UP'), -10.0)
+        self.assertEqual(type(round(-8.0, -1, rounding='ROUND_HALF_UP')), float)
 
-        self.assertEqual(type(round(-8.0, 0, rounding=ROUND_HALF_UP)), float)
-        self.assertEqual(type(round(-8.0, 1, rounding=ROUND_HALF_UP)), float)
+        self.assertEqual(type(round(-8.0, 0, rounding='ROUND_HALF_UP')), float)
+        self.assertEqual(type(round(-8.0, 1, rounding='ROUND_HALF_UP')), float)
 
         # Check even / odd rounding behaviour
-        self.assertEqual(round(5.5, rounding=ROUND_HALF_UP), 6)
-        self.assertEqual(round(6.5, rounding=ROUND_HALF_UP), 7)
-        self.assertEqual(round(-5.5, rounding=ROUND_HALF_UP), -6)
-        self.assertEqual(round(-6.5, rounding=ROUND_HALF_UP), -7)
+        self.assertEqual(round(5.5, rounding='ROUND_HALF_UP'), 6)
+        self.assertEqual(round(6.5, rounding='ROUND_HALF_UP'), 7)
+        self.assertEqual(round(-5.5, rounding='ROUND_HALF_UP'), -6)
+        self.assertEqual(round(-6.5, rounding='ROUND_HALF_UP'), -7)
 
         # Check behavior on ints
-        self.assertEqual(round(0, rounding=ROUND_HALF_UP), 0)
-        self.assertEqual(round(8, rounding=ROUND_HALF_UP), 8)
-        self.assertEqual(round(-8, rounding=ROUND_HALF_UP), -8)
-        self.assertEqual(type(round(0, rounding=ROUND_HALF_UP)), int)
-        self.assertEqual(type(round(-8, -1, rounding=ROUND_HALF_UP)), int)
-        self.assertEqual(type(round(-8, 0, rounding=ROUND_HALF_UP)), int)
-        self.assertEqual(type(round(-8, 1, rounding=ROUND_HALF_UP)), int)
+        self.assertEqual(round(0, rounding='ROUND_HALF_UP'), 0)
+        self.assertEqual(round(8, rounding='ROUND_HALF_UP'), 8)
+        self.assertEqual(round(-8, rounding='ROUND_HALF_UP'), -8)
+        self.assertEqual(type(round(0, rounding='ROUND_HALF_UP')), int)
+        self.assertEqual(type(round(-8, -1, rounding='ROUND_HALF_UP')), int)
+        self.assertEqual(type(round(-8, 0, rounding='ROUND_HALF_UP')), int)
+        self.assertEqual(type(round(-8, 1, rounding='ROUND_HALF_UP')), int)
 
         # test new kwargs
-        self.assertEqual(round(number=-8.0, ndigits=-1, rounding=ROUND_HALF_UP), -10.0)
+        self.assertEqual(round(number=-8.0, ndigits=-1, rounding='ROUND_HALF_UP'), -10.0)
 
         self.assertRaises(TypeError, round)
+        self.assertEqual(round(0.5, rounding='ROUND_HALF_DOWN'), TypeError)
 
         # test generic rounding delegation for reals
         class TestRound:
